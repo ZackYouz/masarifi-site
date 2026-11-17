@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Temporary PokMira mark. Replace this file with the official brand/pokmira-logo-ocean.svg (same file name). -->
+  <defs>
+    <linearGradient id="g" x1="6" y1="8" x2="58" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4CCBFA"/><stop offset=".5" stop-color="#4F7BFF"/><stop offset="1" stop-color="#8057FF"/>
+    </linearGradient>
+  </defs>
+  <path d="M14 17 Q32 4 50 17" stroke="url(#g)" stroke-width="4" stroke-linecap="round"/>
+  <path d="M10 17 H50 V34 C50 46 41 54 30 58 C19 54 10 46 10 34 Z" stroke="url(#g)" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M16 23 H44 V34 C44 42 38 48 30 51 C22 48 16 42 16 34 Z" stroke="url(#g)" stroke-width="1.5" stroke-dasharray="2.5 2.5" opacity=".7"/>
+  <circle cx="51" cy="33" r="8" fill="#F0BF59"/>
+  <circle cx="51" cy="33" r="4.2" stroke="#151426" stroke-width="1.6" opacity=".55"/>
+</svg>
