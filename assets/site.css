@@ -97,6 +97,11 @@ section{padding:88px 0}
 .bar.warn i{background:var(--gold)}
 .num{direction:ltr;unicode-bidi:isolate;font-variant-numeric:tabular-nums}
 
+/* Preview video */
+.teaser{padding:0 0 88px}
+.teaser-video{display:block;width:100%;height:auto;aspect-ratio:1620/676;border-radius:22px;border:1px solid var(--line);background:#0E0D1C;box-shadow:0 40px 80px -50px rgba(128,87,255,.6)}
+@media (max-width:520px){.teaser{padding-bottom:64px}.teaser-video{border-radius:14px}}
+
 /* Currency */
 .fx{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
 .fx > div{padding:24px 26px;border-inline-end:1px solid var(--line)}
@@ -166,6 +171,14 @@ details li{margin-top:6px}
 .legal p,.legal li{margin-top:10px}
 .legal ul{padding-inline-start:22px}
 .legal .summary{margin-top:28px;background:var(--surface);border-inline-start:4px solid var(--mint);border-radius:14px;padding:20px 24px}
+
+/* Social links */
+.social{display:flex;gap:10px}
+.social a{width:40px;height:40px;border-radius:12px;border:1px solid var(--line);display:grid;place-items:center;color:var(--muted)}
+.social a:hover{color:var(--ink);border-color:var(--cyan)}
+.social svg{width:20px;height:20px}
+.btn svg{width:20px;height:20px}
+.follow{margin-top:40px;color:var(--muted)}
 
 /* Footer */
 .site-footer{border-top:1px solid var(--line);padding:40px 0;color:var(--muted);font-size:15px}
