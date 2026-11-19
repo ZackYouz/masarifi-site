@@ -47,6 +47,9 @@
       document.querySelectorAll('video[autoplay]').forEach(function (v) { v.removeAttribute('autoplay'); v.pause(); });
     }
     syncVideos(root.lang);
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      var t = document.querySelector('.pm-teaser'); if (t && t.pauseAnimations) t.pauseAnimations();
+    }
     var y = document.getElementById('yr');
     if (y) y.textContent = new Date().getFullYear();
   });

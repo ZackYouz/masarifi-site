@@ -99,8 +99,10 @@ section{padding:88px 0}
 
 /* Preview video */
 .teaser{padding:0 0 88px}
+.teaser-frame{border-radius:var(--radius);overflow:hidden;border:1px solid var(--line);box-shadow:0 40px 80px -40px rgba(79,123,255,.45)}
+.teaser-frame svg{display:block;width:100%;height:auto}
 .teaser-video{display:block;width:100%;height:auto;aspect-ratio:1620/676;border-radius:22px;border:1px solid var(--line);background:#0E0D1C;box-shadow:0 40px 80px -50px rgba(128,87,255,.6)}
-@media (max-width:520px){.teaser{padding-bottom:64px}.teaser-video{border-radius:14px}}
+@media (max-width:520px){.teaser{padding:0 0 64px}.teaser-video{border-radius:14px}}
 
 /* Currency */
 .fx{margin-top:40px;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
