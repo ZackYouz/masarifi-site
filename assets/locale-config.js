@@ -7,44 +7,42 @@
      otherwise the site falls back to English (the country and its
      currency are kept either way).
    - slogans: the Arabic slogan per country. status 'approved' shows on the
-     live site. 'pending' only shows when showPendingSlogans is true
-     (preview builds) or when the page is opened with ?review=1.
-     Fallback for a pending market: 'ar-general' if approved,
-     otherwise the approved English slogan.
+     live site. Review builds may include pending slogans. The Arabic fallback
+     is the product headline when no applicable slogan is approved.
    - exampleRates: rough units per 1 US dollar, used ONLY to size the
      example amounts on the homepage. They are not live rates.
 */
 window.POKMIRA_LOCALE = {
   approvedLanguages: ['en', 'ar'],
-  showPendingSlogans: false,
+  showPendingSlogans: true,
 
   // English slogan (approved) — shown as written in the page HTML
   englishSlogan: 'Every pocket. A better future.',
 
   slogans: {
-    'ar-general': { text: 'لكل مبلغ جيبه، ولكل هدف مستقبله.', dialect: 'Modern Standard Arabic', status: 'pending' },
+    'ar-general': { text: 'لكل مبلغ جيب، ولكل هدف مستقبل.', dialect: 'Modern Standard Arabic', status: 'pending' },
     LB: { text: 'كل ليرة والها جيبة، وكل هدف إله مستقبل.', dialect: 'Lebanese', status: 'approved' },
     SY: { text: 'كل ليرة إلها جيبة، وكل هدف إلو مستقبل.', dialect: 'Syrian', status: 'pending' },
-    JO: { text: 'كل دينار إله جيبة، وكل هدف إله مستقبل.', dialect: 'Jordanian', status: 'pending' },
-    PS: { text: 'كل شيكل إله جيبة، وكل هدف إله مستقبل.', dialect: 'Palestinian', status: 'pending' },
+    JO: { text: 'كل دينار إله جيب، وكل هدف إله مستقبل.', dialect: 'Jordanian', status: 'pending' },
+    PS: { text: 'كل قرش إله جيب، وكل هدف إله مستقبل.', dialect: 'Palestinian', status: 'pending' },
     IQ: { text: 'كل دينار إله جيب، وكل هدف إله مستقبل.', dialect: 'Iraqi', status: 'pending' },
     SA: { text: 'كل ريال له جيبه، وكل هدف له مستقبل.', dialect: 'Saudi', status: 'pending' },
-    KW: { text: 'كل دينار له جيبه، وكل هدف له مستقبله.', dialect: 'Kuwaiti', status: 'pending' },
-    AE: { text: 'كل درهم له مكانه في الجيب، وكل هدف له مستقبل.', dialect: 'Emirati', status: 'pending' },
-    QA: { text: 'كل ريال له جيب، وكل هدف له مستقبله.', dialect: 'Qatari', status: 'pending' },
-    BH: { text: 'كل دينار له جيب، وكل هدف له مستقبل.', dialect: 'Bahraini', status: 'pending' },
-    OM: { text: 'كل بيسة لها جيبها، وكل هدف له مستقبل.', dialect: 'Omani', status: 'pending' },
+    KW: { text: 'كل دينار له جيبه، وكل هدف له مستقبل.', dialect: 'Kuwaiti', status: 'pending' },
+    AE: { text: 'كل درهم له جيبه، وكل هدف له مستقبل.', dialect: 'Emirati', status: 'pending' },
+    QA: { text: 'كل ريال له جيبه، وكل هدف له مستقبل.', dialect: 'Qatari', status: 'pending' },
+    BH: { text: 'كل دينار له جيبه، وكل هدف له مستقبل.', dialect: 'Bahraini', status: 'pending' },
+    OM: { text: 'كل ريال له جيبه، وكل هدف له مستقبل.', dialect: 'Omani', status: 'pending' },
     YE: { text: 'كل ريال له جيبه، وكل هدف له مستقبله.', dialect: 'Yemeni', status: 'pending' },
-    EG: { text: 'كل جنيه ليه جيب، وكل هدف ليه مستقبل.', dialect: 'Egyptian', status: 'pending' },
+    EG: { text: 'كل جنيه ليه جيبه، وكل هدف ليه مستقبل.', dialect: 'Egyptian', status: 'pending' },
     SD: { text: 'كل جنيه عندو جيبو، وكل هدف عندو مستقبل.', dialect: 'Sudanese', status: 'pending' },
     LY: { text: 'كل دينار عنده جيبه، وكل هدف عنده مستقبل.', dialect: 'Libyan', status: 'pending' },
     TN: { text: 'كل دينار عندو جيبو، وكل هدف عندو مستقبل.', dialect: 'Tunisian', status: 'pending' },
-    DZ: { text: 'كل دينار عندو الجيب تاعو، وكل هدف عندو مستقبل.', dialect: 'Algerian', status: 'pending' },
-    MA: { text: 'كل درهم عندو الجيب ديالو، وكل هدف عندو المستقبل ديالو.', dialect: 'Moroccan (Darija)', status: 'pending' },
-    MR: { text: 'كل أوقية عندها جيبها، وكل هدف عندو مستقبل.', dialect: 'Mauritanian (Hassaniya)', status: 'pending' },
-    SO: { text: 'لكل شلن جيب، ولكل هدف مستقبل.', dialect: 'Standard Arabic (Somalia)', status: 'pending' },
-    DJ: { text: 'لكل فرنك جيب، ولكل هدف مستقبل.', dialect: 'Standard Arabic (Djibouti)', status: 'pending' },
-    KM: { text: 'لكل فرنك جيبه، ولكل هدف مستقبله.', dialect: 'Standard Arabic (Comoros)', status: 'pending' }
+    DZ: { text: 'كل دينار عندو جيبو، وكل هدف عندو مستقبل.', dialect: 'Algerian', status: 'pending' },
+    MA: { text: 'كل درهم عندو جيبو، وكل هدف عندو مستقبل.', dialect: 'Moroccan (Darija)', status: 'pending' },
+
+
+
+
   },
 
   // Markets with their own homepage copy and examples (others use the general copy)

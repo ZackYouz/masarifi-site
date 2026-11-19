@@ -5,7 +5,7 @@
   if (!C) return;
   var root = document.documentElement;
   var KEY = 'pokmira-country';
-  var review = C.showPendingSlogans || /[?&]review=1\b/.test(location.search);
+  var review = C.showPendingSlogans === true;
 
   var T = {
     en: {
@@ -138,12 +138,12 @@
 
     // Slogan (hero, footer, Arabic page title)
     var s = arSlogan(cc);
+    var arabicHeadline = 'بوك ميرا تطبيق لمصروفك اليومي.';
     each('[data-l10n="slogan-ar"]', function (el) {
-      el.textContent = s ? s.text : C.englishSlogan;
-      if (s) el.removeAttribute('dir'); else el.setAttribute('dir', 'ltr');
+      el.textContent = s ? s.text : arabicHeadline;
     });
     if (document.getElementById('hero-card')) {
-      root.setAttribute('data-title-ar', 'بوك ميرا — ' + (s ? s.text.split('،')[0] : C.englishSlogan));
+      root.setAttribute('data-title-ar', 'بوك ميرا — ' + (s ? s.text.split('،')[0] : arabicHeadline));
       if (L() === 'ar') document.title = root.getAttribute('data-title-ar');
     }
     each('[data-l10n="slogan-tag"]', function (el) {
