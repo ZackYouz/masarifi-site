@@ -33,7 +33,12 @@
     if (t) document.title = t;
     try { localStorage.setItem('pokmira-lang', lang); } catch (e) {}
     syncVideos(lang);
+    // Let other scripts (country/currency) react to the language change
+    try { document.dispatchEvent(new CustomEvent('pokmira:lang', { detail: { lang: lang } })); } catch (e) {}
   }
+
+  window.PokMira = window.PokMira || {};
+  window.PokMira.setLang = setLang;
 
   setLang(pickStart());
 
