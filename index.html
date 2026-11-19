@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" dir="ltr" data-title-en="PokMira — Every pocket. A better future." data-title-ar="بوك ميرا — كل قرش إله مكان">
+<html lang="en" dir="ltr" data-title-en="PokMira — Every pocket. A better future." data-title-ar="بوك ميرا — كل ليرة والها جيبة">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,6 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <script src="assets/site.js"></script>
+<script src="assets/locale-config.js" defer></script>
+<script src="assets/locale.js" defer></script>
 </head>
 <body>
 
@@ -40,9 +42,12 @@
     <div class="wrap hero-grid">
       <div>
         <h1 lang="en">Every pocket.<br>A better future.</h1>
-        <h1 lang="ar">كل قرش إله مكان، وكل هدف إله مستقبل.</h1>
-        <p class="lede" lang="en">PokMira is a money app built for Lebanon. Log what you spend in dollars or lira, set budgets and savings goals, and always know what's left to spend. Everything stays on your phone.</p>
-        <p class="lede" lang="ar">بوك ميرا تطبيق مصاريف معمول للبنان. سجّل مصروفك بالدولار أو بالليرة، حطّ ميزانية وأهداف توفير، وبتعرف دايماً قدّيش فيك تصرف. كل شي بيبقى على تلفونك.</p>
+        <h1 lang="ar" data-l10n="slogan-ar">كل ليرة والها جيبة، وكل هدف إله مستقبل.</h1>
+        <p class="pending-tag" data-l10n="slogan-tag" hidden></p>
+        <p class="lede" lang="en" data-copy="lb">PokMira is a money app built for Lebanon. Log what you spend in dollars or lira, set budgets and savings goals, and always know what's left to spend. Everything stays on your phone.</p>
+        <p class="lede" lang="ar" data-copy="lb">بوك ميرا تطبيق مصاريف معمول للبنان. سجّل مصروفك بالدولار أو بالليرة، حطّ ميزانية وأهداف توفير، وبتعرف دايماً قدّيش فيك تصرف. كل شي بيبقى على تلفونك.</p>
+        <p class="lede" lang="en" data-copy="general" hidden>PokMira is a money app for your everyday spending. Log what you spend, set budgets and savings goals, and always know what's left to spend. Everything stays on your phone.</p>
+        <p class="lede" lang="ar" data-copy="general" hidden>بوك ميرا تطبيق لمصروفك اليومي. سجّل مصروفك، حطّ ميزانية وأهداف توفير، وبتعرف دايماً قدّيش فيك تصرف. كل شي بيبقى على تلفونك.</p>
         <div class="cta-row">
           <span class="btn btn-primary" aria-disabled="true">Google Play <span class="badge"><span lang="en">Coming soon</span><span lang="ar">قريباً</span></span></span>
           <a class="btn btn-ghost" href="features.html"><span lang="en">See all features</span><span lang="ar">شوف كل المزايا</span></a>
@@ -51,16 +56,17 @@
         <p class="hero-note" lang="ar">بدون حساب، بدون ربط مع البنك، وبيشتغل بلا إنترنت.</p>
       </div>
 
-      <div class="phone" role="img" aria-label="Example of the PokMira home screen">
+      <div class="card-col">
+      <div class="phone" id="hero-card" role="img" aria-label="Example of the PokMira home screen">
         <div class="ph-label"><span lang="en">Available to spend</span><span lang="ar">فيك تصرف</span></div>
-        <div class="ph-big num">$1,240</div>
-        <div class="ph-lbp">≈ 110,980,000 LBP</div>
+        <div class="ph-big num" data-usd="1240">$1,240</div>
+        <div class="ph-lbp" id="ph-sub">≈ 110,980,000 LBP</div>
         <div class="ph-split">
-          <div class="ph-tile ph-in"><span class="ph-label"><span lang="en">Income this month</span><span lang="ar">مدخول الشهر</span></span><b class="num">$1,450</b></div>
-          <div class="ph-tile ph-out"><span class="ph-label"><span lang="en">Spent so far</span><span lang="ar">صرفت لهلّق</span></span><b class="num">$612</b></div>
+          <div class="ph-tile ph-in"><span class="ph-label"><span lang="en">Income this month</span><span lang="ar">مدخول الشهر</span></span><b class="num" data-usd="1450">$1,450</b></div>
+          <div class="ph-tile ph-out"><span class="ph-label"><span lang="en">Spent so far</span><span lang="ar">صرفت لهلّق</span></span><b class="num" data-usd="612">$612</b></div>
         </div>
         <div class="ph-row">
-          <div class="top"><span><span lang="en">Groceries budget</span><span lang="ar">ميزانية الأكل</span></span><span class="num">$146 / $180</span></div>
+          <div class="top"><span><span lang="en">Groceries budget</span><span lang="ar">ميزانية الأكل</span></span><span class="num"><span data-usd="146">$146</span> / <span data-usd="180">$180</span></span></div>
           <div class="bar warn"><i style="width:81%"></i></div>
         </div>
         <div class="ph-row">
@@ -68,9 +74,11 @@
           <div class="bar"><i style="width:64%"></i></div>
         </div>
         <div class="ph-row">
-          <div class="top"><span><span lang="en">Phone replacement reserve</span><span lang="ar">احتياط تبديل التلفون</span></span><span class="num">$18 / mo</span></div>
+          <div class="top"><span><span lang="en">Phone replacement reserve</span><span lang="ar">احتياط تبديل التلفون</span></span><span class="num"><span data-usd="18">$18</span><span data-l10n="permonth"> / mo</span></span></div>
           <div class="bar"><i style="width:38%"></i></div>
         </div>
+      </div>
+  <p class="card-cap" id="card-cap">Example amounts in USD and LBP for Lebanon.</p>
       </div>
     </div>
   </section>
@@ -279,18 +287,25 @@
   <section class="band">
     <div class="wrap">
       <div class="section-head">
-        <h2 lang="en">Dollars and lira, in one picture.</h2>
-        <h2 lang="ar">دولار وليرة، بصورة وحدة.</h2>
-        <p class="lede" lang="en">Paid in dollars and got your change in lira? Log it the way it happened. PokMira adds it all up at the exchange rate you set.</p>
-        <p class="lede" lang="ar">دفعت بالدولار وقبضت الباقي بالليرة؟ سجّلها متل ما صارت، وبوك ميرا بيجمعلك كل شي على سعر الصرف اللي بتحدّده إنت.</p>
+        <div data-copy="lb">
+          <h2 lang="en">Dollars and lira, in one picture.</h2>
+          <h2 lang="ar">دولار وليرة، بصورة وحدة.</h2>
+          <p class="lede" lang="en">Paid part in dollars and part in lira? Log it the way it happened. PokMira adds it all up at the exchange rate you set.</p>
+          <p class="lede" lang="ar">دفعت شي بالدولار وشي بالليرة؟ سجّلها متل ما صارت، وبوك ميرا بيجمعلك كل شي على سعر الصرف اللي بتحدّده إنت.</p>
+        </div>
+        <div data-copy="general" hidden>
+          <h2 lang="en">Two currencies, one picture.</h2>
+          <h2 lang="ar">عملتين، بصورة وحدة.</h2>
+          <p class="lede" lang="en">Paid part in one currency and part in another? Log it the way it happened. PokMira adds it all up at the exchange rate you set.</p>
+          <p class="lede" lang="ar">دفعت شي بعملة وشي بعملة تانية؟ سجّلها متل ما صارت، وبوك ميرا بيجمعلك كل شي على سعر الصرف اللي بتحدّده إنت.</p>
+        </div>
       </div>
       <div class="fx">
-        <div><div class="what"><span lang="en">Paid in USD</span><span lang="ar">دفعت بالدولار</span></div><div class="val num">$40</div></div>
-        <div><div class="what"><span lang="en">Change in LBP</span><span lang="ar">الباقي بالليرة</span></div><div class="val num">250,000 LBP</div></div>
-        <div><div class="what"><span lang="en">Total spent</span><span lang="ar">مجموع المصروف</span></div><div class="val num">$42.79</div></div>
+        <div><div class="what" id="fx-s-label">Paid in USD</div><div class="val num" id="fx-s-val">$40</div></div>
+        <div><div class="what" id="fx-l-label">Paid in LBP</div><div class="val num" id="fx-l-val">LBP 250,000</div></div>
+        <div><div class="what" id="fx-t-label">Total spent</div><div class="val num" id="fx-t-val">$42.79</div></div>
       </div>
-      <p class="fx-cap small muted" lang="en">Example at 89,500 LBP per dollar. You set the rate and change it whenever you need.</p>
-      <p class="fx-cap small muted" lang="ar">مثال على سعر ٨٩٬٥٠٠ ل.ل للدولار. إنت بتحدّد السعر وبتغيّره ساعة ما بدّك.</p>
+      <p class="fx-cap small muted" id="fx-cap">Example at 89,500 LBP per US dollar. You set the rate and change it whenever you need.</p>
     </div>
   </section>
 
@@ -384,7 +399,7 @@
 <footer class="site-footer">
   <div class="wrap foot">
     <span lang="en">Every pocket. A better future.</span>
-    <span lang="ar">كل قرش إله مكان، وكل هدف إله مستقبل.</span>
+    <span lang="ar" data-l10n="slogan-ar">كل ليرة والها جيبة، وكل هدف إله مستقبل.</span>
     <nav aria-label="Footer">
       <a href="features.html"><span lang="en">Features</span><span lang="ar">المزايا</span></a>
       <a href="support.html"><span lang="en">Support</span><span lang="ar">المساعدة</span></a>
