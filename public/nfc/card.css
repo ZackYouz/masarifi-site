@@ -27,27 +27,59 @@ dialog{max-inline-size:min(90vw,24rem);border:1px solid #42466b;background:#191c
 dialog::backdrop{background:#0b0d1acc}dialog svg{display:block;inline-size:min(65vw,16rem);margin:auto}#qr-link{overflow-wrap:anywhere}
 [hidden]{display:none!important}:focus-visible{outline:3px solid #c4b4ff;outline-offset:3px}
 
-/* Photo-free card and compact PokMira teaser */
-body{border-inline:3px solid #5948aa}
-.profile{text-align:start;background:#f8f7fc;color:#151629}
-.profile p{color:#51516a}
-.profile .avatar{display:none}
 
-.profile .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,7rem),1fr));gap:.55rem;margin-block-start:1.2rem}
-.profile .actions .primary{grid-column:1/-1;margin:0;min-block-size:52px;background:#372461;color:#fff;border-color:#372461;font-weight:780}
-.profile .actions :is(.action,.quiet):not(.primary){background:#fff;color:#372461;border:1px solid #ddd5ec;font-size:.9rem}
-.profile .actions :is(.action,.quiet):hover{filter:brightness(.94)}
-.pocket-teaser{flex:0 0 100%;display:grid;place-items:center}
-.pocket-teaser svg{display:block;width:min(100%,180px);height:auto}
-.pm-teaser .en{display:none}
-.pm-teaser .a{font-family:system-ui,sans-serif;font-weight:900;fill:#f4f3fa;text-anchor:middle;direction:rtl}
-.pm-teaser .g{fill:#f0bf59}
-@media(max-height:700px){
-  footer{position:static}
-  .pocket-teaser svg{width:min(100%,145px)}
+:root{
+  color-scheme:light;
+  --pk-brand:#101225;--pk-brand-accent:#5DCAA5;
+  --pk-header-icon:#D3D1C7;--pk-header-icon-border:#444441;--pk-header-muted:#B4B2A9;
+  --pk-owner-bg:#EEEDFE;--pk-owner-text:#3C3489;--pk-surface:#FFFFFF;
+  --pk-page-bg:#F1EFE8;--pk-text:#1F1E1D;--pk-text-2:#5F5E5A;--pk-text-3:#888780;
+  --pk-border:rgba(0,0,0,.12);--pk-border-strong:rgba(0,0,0,.22);--pk-radius-card:12px;
+  background:var(--pk-page-bg);color:var(--pk-text)
 }
+body{width:min(100%,420px);margin-inline:auto;background:var(--pk-surface);font-weight:400;min-block-size:100dvh}
+@media(min-width:481px){body{margin-block:20px;min-block-size:0;border-radius:28px;border:.5px solid var(--pk-border-strong);overflow:hidden}}
+strong,.primary,.wordmark,h1{font-weight:500}
+header{width:100%;background:var(--pk-brand);color:white;padding:14px 18px 50px;align-items:flex-start}
+.wordmark{font-size:15px;line-height:1.2}.wordmark span{color:var(--pk-brand-accent)}
+.brand-socials{display:flex;gap:6px;margin-block-start:7px}
+.brand-socials a{position:relative;display:grid;place-items:center;width:24px;height:24px;border:.5px solid var(--pk-header-icon-border);border-radius:7px;color:var(--pk-header-icon)}
+.brand-socials a::after{content:"";position:absolute;inset-block:-6px;inset-inline:-3px}
+.brand-socials svg{width:14px;height:14px}
+#language{min-block-size:36px;color:var(--pk-header-muted);font-size:12px;padding:.25rem .5rem}
+main{width:100%;display:block;padding:0}
+main>p,noscript{display:block;text-align:center;font-size:13px;color:var(--pk-text-2);padding:18px}
+main section{background:var(--pk-surface);border:0;color:var(--pk-text);padding:18px}
+main p{color:var(--pk-text-2)}
+main .profile{padding:0;text-align:center}
+.profile .avatar{width:84px;height:84px;margin:-40px auto 0;border:4px solid var(--pk-surface);background:var(--pk-owner-bg);color:var(--pk-owner-text);font-size:26px;font-weight:500}
+.profile h1{font-size:18px;margin:10px 20px 0;line-height:1.35}
+.profile>p{font-size:13px;line-height:1.55;margin:2px 20px 0}
+.profile>p + p{margin-block-start:10px;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.profile .actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:16px 18px 0}
+.profile .actions .action,.profile .actions button{min-width:0;min-height:44px;border:0;border-radius:var(--pk-radius-card);font-size:13px;padding:4px;background:var(--pk-owner-bg);color:var(--pk-owner-text)}
+.profile .actions .primary{order:4;grid-column:1/-1;min-height:46px;margin:8px 0 0;background:var(--pk-brand);color:white;font-size:14px}
+.profile .actions a[href^="http"]:not([href^="https://wa.me/"]){order:2;grid-column:1/-1;min-height:36px;border:.5px solid var(--pk-border);background:var(--pk-surface);color:var(--pk-text-2)}
+.profile .actions button{order:3;grid-column:1/-1;justify-self:center;min-height:36px;background:var(--pk-surface);color:var(--pk-text-2);border:.5px solid var(--pk-border);padding-inline:12px}
+footer{display:block;min-block-size:0;position:static;padding:0 18px 18px;border:0;background:var(--pk-surface);color:var(--pk-text-3);text-align:center}
+.pocket-teaser{margin-block-start:16px}
+.pocket-teaser svg{display:block;width:min(100%,220px);height:auto;margin-inline:auto;border-radius:8px}
+.pm-teaser text{font-family:system-ui,sans-serif;font-weight:500;text-anchor:middle;fill:#f4f3fa}
+.pm-teaser .a{direction:rtl}.pm-teaser .g{fill:#f0bf59}
+[lang=en] .pm-teaser .ar,[lang=ar] .pm-teaser .en{display:none}
+[lang=ar] .ad-copy [lang=en],[lang=en] .ad-copy [lang=ar]{display:none}
 .teaser-static{display:none}
-@media(prefers-reduced-motion:reduce){
-  .pocket-teaser svg{display:none}
-  .teaser-static{display:block;font-weight:750;color:#e4daff;padding:.25rem}
-}
+@media(prefers-reduced-motion:reduce){.pocket-teaser svg{display:none}.teaser-static{display:block}}
+.ad-card{display:flex;align-items:center;gap:10px;padding:10px 12px;margin-block:16px 0;border:.5px dashed var(--pk-border-strong);border-radius:var(--pk-radius-card);text-align:start;text-decoration:none;color:var(--pk-text)}
+.ad-icon{display:grid;place-items:center;flex:none;width:32px;height:32px;border-radius:8px;background:var(--pk-brand);color:var(--pk-brand-accent)}
+.ad-icon svg{width:17px;height:17px}.ad-copy{font-size:12px;font-weight:500}
+.ad-copy small,.credit small{color:var(--pk-text-3);font-size:11px;font-weight:400}
+.ad-chevron{margin-inline-start:auto;color:var(--pk-text-3);display:flex}.ad-chevron svg{width:16px;height:16px}
+[dir=rtl] .ad-chevron{transform:scaleX(-1)}
+footer .links a,#owner{min-block-size:36px;background:transparent;color:var(--pk-text-2);border:0;font-size:12px}
+.credit{font-size:11px;margin-block:6px 0}.credit small{display:inline}
+input,select,button,.action,dialog{background:var(--pk-surface);color:var(--pk-text);border-color:var(--pk-border-strong)}
+form .primary{background:var(--pk-brand);color:white}.error{color:#a32b31}
+:where(button,a):hover{opacity:.9}
+:where(button,a):active{transform:scale(.98)}
+:focus-visible{outline:2px solid var(--pk-brand-accent);outline-offset:2px}
