@@ -61,27 +61,104 @@ function save(card) {
   return {saveLink,url};
 }
 let contactURL;
+const iconPaths={
+  phone:'M5 4h4l2 5-2 2a14 14 0 0 0 4 4l2-2 5 2v4c-8 2-17-7-15-15z',
+  'brand-whatsapp':'M5 17l-1 4 4-1a9 9 0 1 0-3-3z M9 8c-2 2 3 7 5 7l2-2-3-1-1 1-2-2 1-1-1-3z',
+  mail:'M3 5h18v14H3z M3 6l9 7 9-7',
+  world:'M3 12h18 M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18z M12 3c-5 5-5 13 0 18m0-18c5 5 5 13 0 18',
+  link:'M10 13l4-4m-7 6-1 1a3 3 0 0 0 4 4l4-4a3 3 0 0 0 0-4m3-3 1-1a3 3 0 0 0-4-4l-4 4a3 3 0 0 0 0 4',
+  'brand-instagram':'M3 8a5 5 0 0 1 5-5h8a5 5 0 0 1 5 5v8a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z M12 8a4 4 0 1 0 0 8a4 4 0 0 0 0-8zm5-1h.01',
+  'brand-tiktok':'M14 3v13a4 4 0 1 1-4-4m4-9a6 6 0 0 0 6 6',
+  'brand-linkedin':'M4 9v11m0-16h.01M9 20V9m0 5c0-6 10-6 10 0v6',
+  'brand-facebook':'M14 21v-8h4l1-4h-5V7c0-2 2-2 5-2V2c-5-1-9 1-9 5v2H6v4h4v8',
+  'brand-x':'M4 4h4l12 16h-4z M20 4L4 20',
+  qrcode:'M3 3h6v6H3z M15 3h6v6h-6z M3 15h6v6H3z M13 13h4v4h-4z M21 13v4m0 4h-4m-4 0v-2'
+};
+function withIcon(node,name) {
+  const ns='http://www.w3.org/2000/svg';
+  const svg=document.createElementNS(ns,'svg');
+  svg.setAttribute('viewBox','0 0 24 24');
+  svg.setAttribute('aria-hidden','true');
+  svg.setAttribute('class','contact-icon ti-'+name);
+  const path=document.createElementNS(ns,'path');
+  path.setAttribute('d',iconPaths[name]);
+  svg.append(path);
+  node.prepend(svg);
+  return node;
+}
+function decorateBio(node,value) {
+  const tokens=/\*\*([^*]+)\*\*|\*([^*]+)\*/g;
+  let last=0;
+  for(const match of value.matchAll(tokens)) {
+    node.append(document.createTextNode(value.slice(last,match.index).replaceAll('*','')));
+    node.append(tag(match[1]===undefined?'em':'strong',match[1]??match[2]));
+    last=match.index+match[0].length;
+  }
+  node.append(document.createTextNode(value.slice(last).replaceAll('*','')));
+}
+function socialDisplay(url) {
+  const {hostname,pathname}=new URL(url);
+  const domains={
+    'instagram.com':'instagram','tiktok.com':'tiktok','linkedin.com':'linkedin',
+    'facebook.com':'facebook','x.com':'x','twitter.com':'x'
+  };
+  const domain=Object.keys(domains).find(key=>hostname===key||hostname.endsWith('.'+key));
+  const platform=domains[domain];
+  const parts=pathname.split('/').filter(Boolean);
+  const profile=(platform==='linkedin'&&['in','company'].includes(parts[0]))?parts[1]:parts[0];
+  let handle=profile||'';
+  try { handle=decodeURIComponent(handle); } catch {}
+  return [platform?'brand-'+platform:'link',platform&&handle?'@'+handle.replace(/^@/,''):hostname.replace(/^www\./,'')+ (pathname==='/'?'':pathname)];
+}
 function profile(section,card) {
   section.className='profile';
   const initials=(card.full_name||'').trim().split(/\s+/u).slice(0,2).map(word=>Array.from(word)[0]).join('');
   const avatar=tag('div',initials,'avatar');
   avatar.setAttribute('aria-hidden','true');
-  if(/^#[a-f\d]{6}$/i.test(card.theme_color)) avatar.style.setProperty('--accent',card.theme_color);
   section.append(avatar);
   heading(section,card.full_name).dir='auto';
-  for (const line of [[card.job_title,card.company].filter(Boolean).join(' · '),card.bio]) {
-    if(line) {const p=tag('p',line);p.dir='auto';section.append(p);}
+  const identity=[card.job_title,card.company].filter(Boolean).join(' · ');
+  if(identity) {
+    const line=tag('p',identity);line.dir='auto';section.append(line);
+  }
+  if(card.bio?.replaceAll('*','').trim()) {
+    const bio=tag('p','','bio');bio.dir='auto';decorateBio(bio,card.bio);section.append(bio);
   }
   const actions=tag('div','','actions');
-  const {saveLink,url}=save(card);contactURL=url;actions.append(saveLink);
-  if(card.phone) actions.append(link(tr('Call','اتصال'),'tel:'+digits(card.phone)));
-  if(card.whatsapp) actions.append(link('WhatsApp','https://wa.me/'+digits(card.whatsapp).replace('+','')));
-  if(card.email) actions.append(link(tr('Email','بريد إلكتروني'),'mailto:'+encodeURIComponent(card.email)));
-  for(const [key,label] of [['website',tr('Website','الموقع')],['social_link',tr('Social profile','حساب التواصل')]]) {
-    const url=validURL(card[key]);if(url) actions.append(link(label,url));
+  const info=tag('div','','contact-info');
+  const row=(label,url,icon)=>{
+    const value=tag('bdi',label);
+    const item=link('',url,'contact-row');
+    item.append(value);
+    info.append(withIcon(item,icon));
+  };
+  if(card.phone) {
+    const url='tel:'+digits(card.phone);
+    actions.append(withIcon(link(tr('Call','اتصال'),url),'phone'));
+    row(card.phone,url,'phone');
   }
-  actions.append(button(tr('Show QR code','عرض رمز QR'),showQR));
-  section.append(actions);
+  if(card.whatsapp) actions.append(withIcon(link('WhatsApp','https://wa.me/'+digits(card.whatsapp).replace('+','')),'brand-whatsapp'));
+  if(card.email) {
+    const url='mailto:'+encodeURIComponent(card.email);
+    actions.append(withIcon(link(tr('Email','بريد إلكتروني'),url),'mail'));
+    row(card.email,url,'mail');
+  }
+  const website=validURL(card.website);
+  if(website) {
+    const {hostname,pathname}=new URL(website);
+    row(hostname.replace(/^www\./,'')+(pathname==='/'?'':pathname),website,'world');
+  }
+  const social=validURL(card.social_link);
+  if(social) {
+    const [icon,label]=socialDisplay(social);
+    row(label,social,icon);
+  }
+  if(actions.childElementCount) section.append(actions);
+  if(info.childElementCount) section.append(info);
+  section.append(withIcon(button(tr('Show QR code','عرض رمز QR'),showQR,'contact-qr quiet'),'qrcode'));
+  const {saveLink,url}=save(card);contactURL=url;
+  saveLink.classList.add('contact-save');
+  section.append(saveLink);
 }
 const fields=[
  ['full_name','Full name','الاسم الكامل','text',100],['job_title','Job title','المسمّى الوظيفي','text',90],
