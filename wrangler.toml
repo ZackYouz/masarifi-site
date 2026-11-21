@@ -1,0 +1,11 @@
+name = "masarifi-site"
+compatibility_date = "2026-11-21"
+pages_build_output_dir = "./public"
+
+[vars]
+BRAND_CONFIG = '{"mode":"prelaunch","links":[{"label":"Learn about Pokmira","label_ar":"تعرّف على بوك ميرا","url":"https://pokmira.online/"}]}'
+
+[[d1_databases]]
+binding = "DB"
+database_name = "pokmira-cards"
+database_id = "ba79d278-1168-4bb4-8578-b2ad5e5313c5"
