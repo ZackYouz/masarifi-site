@@ -32,7 +32,22 @@ body{border-inline:3px solid #5948aa}
 .profile{text-align:start;background:#f8f7fc;color:#151629}
 .profile p{color:#51516a}
 .profile .avatar{display:none}
-.profile .actions{justify-content:start}
+
+.profile .actions{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,7rem),1fr));gap:.55rem;margin-block-start:1.2rem}
+.profile .actions .primary{grid-column:1/-1;margin:0;min-block-size:52px;background:#372461;color:#fff;border-color:#372461;font-weight:780}
+.profile .actions :is(.action,.quiet):not(.primary){background:#fff;color:#372461;border:1px solid #ddd5ec;font-size:.9rem}
+.profile .actions :is(.action,.quiet):hover{filter:brightness(.94)}
 .pocket-teaser{flex:0 0 100%;display:grid;place-items:center}
-.pocket-teaser img{display:block;width:min(100%,180px);height:auto}
-@media (max-height:700px),(prefers-reduced-motion:reduce){.pocket-teaser{display:none}}
+.pocket-teaser svg{display:block;width:min(100%,180px);height:auto}
+.pm-teaser .en{display:none}
+.pm-teaser .a{font-family:system-ui,sans-serif;font-weight:900;fill:#f4f3fa;text-anchor:middle;direction:rtl}
+.pm-teaser .g{fill:#f0bf59}
+@media(max-height:700px){
+  footer{position:static}
+  .pocket-teaser svg{width:min(100%,145px)}
+}
+.teaser-static{display:none}
+@media(prefers-reduced-motion:reduce){
+  .pocket-teaser svg{display:none}
+  .teaser-static{display:block;font-weight:750;color:#e4daff;padding:.25rem}
+}
